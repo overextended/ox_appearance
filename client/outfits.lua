@@ -74,7 +74,7 @@ RegisterCommand('wardrobe', function(source, args, raw)
             title = "Save",
             description = "save new outfit",
             arrow = true,
-            event = 'ox_appearance:save',
+            event = 'ox_appearance:saveOut',
             args = {slot= "new", name= ""}
         },
         {
@@ -127,7 +127,7 @@ RegisterNetEvent('ox_appearance:setOutfit', function(data)
 			},
 			['Replace'] = {
 				description =  "Replace outfit: "..data.name,
-				event = 'ox_appearance:save',
+				event = 'ox_appearance:saveOut',
 				args = data
 				
 			}
@@ -137,7 +137,7 @@ RegisterNetEvent('ox_appearance:setOutfit', function(data)
 
 end)
 
-RegisterNetEvent('ox_appearance:save', function(data)
+RegisterNetEvent('ox_appearance:saveOut', function(data)
 	if not outfitNames then
 		getOutfitNames()
 	end
