@@ -31,20 +31,11 @@ RegisterNetEvent('ox_appearance:outfit', function(slot, data)
 	outfits[slot] = data
 end)
 
-RegisterCommand('outfits', function(source, args, raw)
-	if not outfitNames then
-		getOutfitNames()
-	end
-	print(json.encode(outfitNames, {indent=true}))
-end)
-
 RegisterCommand('saveoutfit', function(source, args, raw)
 	local slot = tonumber(args[1])
 
 	if type(slot) == 'number' then
-		if not outfitNames then
-			getOutfitNames()
-		end
+		if not outfitNames then getOutfitNames() end
 
 		local appearance = exports['fivem-appearance']:getPedAppearance(cache.ped)
 		outfitNames[slot] = args[2]
@@ -65,7 +56,7 @@ RegisterCommand('outfit', function(source, args, raw)
 	end
 end)
 
-RegisterCommand('wardrobe', function(source, args, raw)
+RegisterCommand('outfits', function(source, args, raw)
     lib.registerContext({
         id = 'save_change',
         title = 'Outfit Menu',
@@ -86,10 +77,10 @@ RegisterCommand('wardrobe', function(source, args, raw)
 end)
 
 RegisterNetEvent('ox_appearance:wardrobe', function()
-    if not outfitNames then
-        getOutfitNames()
-    end
+    if not outfitNames then getOutfitNames() end
+
     options = {}
+
     for k, v in pairs(outfitNames) do
         options[v] = {}
         options[v].event = 'ox_appearance:setOutfit'
@@ -133,14 +124,13 @@ RegisterNetEvent('ox_appearance:setOutfit', function(data)
 			}
 		}
 	})
-	lib.showContext('replace_use')
 
+	lib.showContext('replace_use')
 end)
 
 RegisterNetEvent('ox_appearance:saveOut', function(data)
-	if not outfitNames then
-		getOutfitNames()
-	end
+	if not outfitNames then getOutfitNames() end
+
 	if data.slot == "new" then
 		data.slot = getTableSize(outfitNames) + 1
 		local name = lib.inputDialog('New name', {'Insert Name'})
@@ -176,6 +166,7 @@ RegisterNetEvent('ox_appearance:use', function(data)
     local appearance = getOutfit(slot)
 
     if not appearance.model then appearance.model = 'mp_m_freemode_01' end
+
     if lib.progressCircle({
         duration = 3000,
         position = 'bottom',
@@ -190,8 +181,11 @@ RegisterNetEvent('ox_appearance:use', function(data)
         },
     }) then 
 		exports['fivem-appearance']:setPlayerAppearance(appearance)
-    	TriggerServerEvent('esx_skin:save', appearance)
-    else 
-        print('Do stuff when cancelled') 
-    end    
+
+    	if ESX then
+			TriggerServerEvent('esx_skin:save', appearance)
+		else
+			TriggerServerEvent('ox_appearance:save', appearance)
+		end
+    end  
 end)
