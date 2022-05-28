@@ -46,7 +46,7 @@ RegisterCommand('saveoutfit', function(source, args, raw)
 			getOutfitNames()
 		end
 
-		local appearance = exports['fivem-appearance']:getPedAppearance()
+		local appearance = exports['fivem-appearance']:getPedAppearance(cache.ped)
 		outfitNames[slot] = args[2]
 		outfits[slot] = appearance
 
@@ -145,7 +145,7 @@ RegisterNetEvent('ox_appearance:saveOut', function(data)
 		data.slot = getTableSize(outfitNames) + 1
 		local name = lib.inputDialog('New name', {'Insert Name'})
 		if name then
-			local appearance = exports['fivem-appearance']:getPedAppearance()
+			local appearance = exports['fivem-appearance']:getPedAppearance(cache.ped)
 			outfitNames[data.slot] = name[1]
 			outfits[data.slot] = appearance
 
@@ -160,7 +160,7 @@ RegisterNetEvent('ox_appearance:saveOut', function(data)
 				Wait(200)
 				local name = lib.inputDialog('New name', {'Rename'})
 				if name then
-					local appearance = exports['fivem-appearance']:getPedAppearance()
+					local appearance = exports['fivem-appearance']:getPedAppearance(cache.ped)
 					outfitNames[data.slot] = name[1]
 					outfits[data.slot] = appearance
 			
