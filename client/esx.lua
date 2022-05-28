@@ -15,7 +15,7 @@ if GetResourceState('es_extended'):find('start') then
 		if cb then cb() end
 	end)
 
-	AddEventHandler('esx_skin:openSaveableMenu', function(submitCb, cancelCb)
+	RegisterNetEvent('esx_skin:openSaveableMenu', function(submitCb, cancelCb)
 		exports['fivem-appearance']:startPlayerCustomization(function (appearance)
 			if (appearance) then
 				TriggerServerEvent('esx_skin:save', appearance)

@@ -16,7 +16,7 @@ dependencies {
 	'/server:5104',
     '/onesync',
     'oxmysql',
-    'ox_appearance',
+    'fivem-appearance',
 }
 
 shared_script '@ox_lib/init.lua'
