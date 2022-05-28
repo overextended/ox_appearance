@@ -1,3 +1,5 @@
+lib.locale()
+
 local outfitNames
 local outfits = {}
 
@@ -59,19 +61,19 @@ end)
 RegisterCommand('outfits', function(source, args, raw)
     lib.registerContext({
         id = 'save_change',
-        title = 'Outfit Menu',
+        title = locale('outfits'),
         options = {
-        {
-            title = "Save",
-            description = "save new outfit",
-            arrow = true,
-            event = 'ox_appearance:saveOut',
-            args = {slot= "new", name= ""}
-        },
-        {
-            title = "Outfits",
-            event = 'ox_appearance:wardrobe',
-        }}
+			{
+				title = locale('wardrobe'),
+				event = 'ox_appearance:wardrobe',
+			},
+			{
+				title = locale('save_outfit'),
+				arrow = true,
+				event = 'ox_appearance:saveOutfit',
+				args = {slot = 'new', name = ''}
+			},
+		}
     })
     lib.showContext('save_change')
 end)
@@ -90,7 +92,7 @@ RegisterNetEvent('ox_appearance:wardrobe', function()
     lib.registerContext({
         id = 'wardrobe_menu',
         menu = 'save_change',
-        title = 'Guardaroba',
+        title = locale('wardrobe'),
         options = options
     })
 
@@ -105,35 +107,37 @@ function getTableSize(t)
     return count
 end
 
-RegisterNetEvent('ox_appearance:setOutfit', function(data)
+AddEventHandler('ox_appearance:setOutfit', function(data)
 	lib.registerContext({
-		id = 'replace_use',
-		title = 'Replace',
+		id = 'set_outfit',
+		title = data.name,
 		menu = 'wardrobe_menu',
 		options = {
-			['Use'] = {
+			{
+				title = locale('wear', data.name),
 				event = 'ox_appearance:use',
 				args = data
 				
 			},
-			['Replace'] = {
-				description =  "Replace outfit: "..data.name,
-				event = 'ox_appearance:saveOut',
+			{
+				title = locale('update', data.name),
+				event = 'ox_appearance:saveOutfit',
 				args = data
 				
 			}
 		}
 	})
 
-	lib.showContext('replace_use')
+	lib.showContext('set_outfit')
 end)
 
-RegisterNetEvent('ox_appearance:saveOut', function(data)
+AddEventHandler('ox_appearance:saveOutfit', function(data)
 	if not outfitNames then getOutfitNames() end
 
-	if data.slot == "new" then
+	if data.slot == 'new' then
 		data.slot = getTableSize(outfitNames) + 1
-		local name = lib.inputDialog('New name', {'Insert Name'})
+		local name = lib.inputDialog(locale('new_outfit'), {locale('outfit_name')})
+
 		if name then
 			local appearance = exports['fivem-appearance']:getPedAppearance(cache.ped)
 			outfitNames[data.slot] = name[1]
@@ -142,21 +146,17 @@ RegisterNetEvent('ox_appearance:saveOut', function(data)
 			TriggerServerEvent('ox_appearance:saveOutfit', appearance, data.slot, outfitNames)
 		end
 	else
-		local input = lib.inputDialog('Confirm saving', {'Insert 1234'})
+		local input = lib.inputDialog(locale('update', data.name), {
+			{ type = 'input', label = locale('outfit_name') },
+			{ type = 'checkbox', label = locale('confirm') },
+		})
 
-		if input then
-			local pin = tonumber(input[1])
-			if pin == 1234 then
-				Wait(200)
-				local name = lib.inputDialog('New name', {'Rename'})
-				if name then
-					local appearance = exports['fivem-appearance']:getPedAppearance(cache.ped)
-					outfitNames[data.slot] = name[1]
-					outfits[data.slot] = appearance
-			
-					TriggerServerEvent('ox_appearance:saveOutfit', appearance, data.slot, outfitNames)
-				end
-			end
+		if input and input[2] then
+			local appearance = exports['fivem-appearance']:getPedAppearance(cache.ped)
+			outfitNames[data.slot] = input[1] or data.name
+			outfits[data.slot] = appearance
+	
+			TriggerServerEvent('ox_appearance:saveOutfit', appearance, data.slot, outfitNames)
 		end
 	end
 end)

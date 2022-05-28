@@ -33,3 +33,7 @@ server_scripts {
     'server/esx.lua',
     'server/ox.lua',
 }
+
+files {
+    'locales/*.json',
+}
