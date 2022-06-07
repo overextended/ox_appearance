@@ -37,3 +37,8 @@ server_scripts {
 files {
     'locales/*.json',
 }
+
+provides {
+    'skinchanger',
+    'esx_skin'
+}
