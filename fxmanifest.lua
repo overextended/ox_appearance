@@ -16,7 +16,6 @@ dependencies {
     '/server:5104',
     '/onesync',
     'oxmysql',
-    'ox_lib',
     'fivem-appearance',
 }
 
