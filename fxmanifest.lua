@@ -13,7 +13,7 @@ description  'Persistant appearance data and outfits for ox_appearance.'
 
 --[[ Manifest ]]--
 dependencies {
-	'/server:5104',
+    '/server:5104',
     '/onesync',
     'oxmysql',
     'fivem-appearance',
