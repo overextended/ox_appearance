@@ -1,0 +1,12 @@
+{
+    "wardrobe": "Armario",
+    "outfits": "Conjuntos",
+    "save": "Guardar",
+    "save_outfit": "Guardar nuevo conjunto",
+    "wear": "Ponerte %s",
+    "update": "Actualizar %s",
+    "outfit_name": "Nombre del Conjunto",
+    "new_outfit": "Nuevo Conjunto",
+    "rename_outfit": "Renombrar Conjunto",
+    "confirm": "Confirmar"
+}
