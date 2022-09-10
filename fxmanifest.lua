@@ -31,7 +31,6 @@ server_scripts {
     '@oxmysql/lib/MySQL.lua',
     'server/main.lua',
     'server/esx.lua',
-    'server/ox.lua',
 }
 
 files {
