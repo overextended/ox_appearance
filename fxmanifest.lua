@@ -9,7 +9,7 @@ name         'ox_appearance'
 author       'Linden'
 version      '1.0.0'
 repository   'https://github.com/overextended/ox_appearance'
-description  'Persistant appearance data and outfits for ox_appearance.'
+description  'Persistent appearance data and outfits for ox_appearance.'
 
 --[[ Manifest ]]--
 dependencies {
