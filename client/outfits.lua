@@ -88,7 +88,7 @@ RegisterNetEvent('ox_appearance:wardrobe', function()
         options[v].event = 'ox_appearance:setOutfit'
         options[v].args = {slot = k, name = v}
     end
-    
+
     lib.registerContext({
         id = 'wardrobe_menu',
         menu = 'save_change',
@@ -117,13 +117,13 @@ AddEventHandler('ox_appearance:setOutfit', function(data)
 				title = locale('wear', data.name),
 				event = 'ox_appearance:use',
 				args = data
-				
+
 			},
 			{
 				title = locale('update', data.name),
 				event = 'ox_appearance:saveOutfit',
 				args = data
-				
+
 			}
 		}
 	})
@@ -155,7 +155,7 @@ AddEventHandler('ox_appearance:saveOutfit', function(data)
 			local appearance = exports['fivem-appearance']:getPedAppearance(cache.ped)
 			outfitNames[data.slot] = input[1] or data.name
 			outfits[data.slot] = appearance
-	
+
 			TriggerServerEvent('ox_appearance:saveOutfit', appearance, data.slot, outfitNames)
 		end
 	end
@@ -177,9 +177,9 @@ RegisterNetEvent('ox_appearance:use', function(data)
         },
         anim = {
             dict = 'missmic4',
-            clip = 'michael_tux_fidget' 
+            clip = 'michael_tux_fidget'
         },
-    }) then 
+    }) then
 		exports['fivem-appearance']:setPlayerAppearance(appearance)
 
     	if ESX then
@@ -187,5 +187,5 @@ RegisterNetEvent('ox_appearance:use', function(data)
 		else
 			TriggerServerEvent('ox_appearance:save', appearance)
 		end
-    end  
+    end
 end)
