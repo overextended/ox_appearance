@@ -53,7 +53,7 @@ local function createBlip(name, sprite, colour, scale, location)
 		SetBlipColour(blip, colour)
 		SetBlipAsShortRange(blip, true)
 		BeginTextCommandSetBlipName('STRING')
-		AddTextComponentString(name)
+		AddTextComponentSubstringPlayerName(name)
 		EndTextCommandSetBlipName(blip)
 	end
 end
