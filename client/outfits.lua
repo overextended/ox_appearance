@@ -18,6 +18,14 @@ local function getOutfit(slot)
 	return outfits[slot]
 end
 
+local function getTableSize(t)
+    local count = 0
+    for _, __ in pairs(t) do
+        count = count + 1
+    end
+    return count
+end
+
 if ESX then
 	RegisterNetEvent('esx:playerLoaded', function()
 		outfitNames = nil
@@ -31,51 +39,6 @@ end)
 
 RegisterNetEvent('ox_appearance:outfit', function(slot, data)
 	outfits[slot] = data
-end)
-
-RegisterCommand('saveoutfit', function(source, args, raw)
-	local slot = tonumber(args[1])
-
-	if type(slot) == 'number' then
-		if not outfitNames then getOutfitNames() end
-
-		local appearance = exports['fivem-appearance']:getPedAppearance(cache.ped)
-		outfitNames[slot] = args[2]
-		outfits[slot] = appearance
-
-		TriggerServerEvent('ox_appearance:saveOutfit', appearance, slot, outfitNames)
-	end
-end)
-
-RegisterCommand('outfit', function(source, args, raw)
-	local slot = tonumber(args[1])
-
-	if type(slot) == 'number' then
-		local appearance = getOutfit(slot)
-
-		if not appearance.model then appearance.model = 'mp_m_freemode_01' end
-		exports['fivem-appearance']:setPlayerAppearance(appearance)
-	end
-end)
-
-RegisterCommand('outfits', function(source, args, raw)
-    lib.registerContext({
-        id = 'save_change',
-        title = locale('outfits'),
-        options = {
-			{
-				title = locale('wardrobe'),
-				event = 'ox_appearance:wardrobe',
-			},
-			{
-				title = locale('save_outfit'),
-				arrow = true,
-				event = 'ox_appearance:saveOutfit',
-				args = {slot = 'new', name = ''}
-			},
-		}
-    })
-    lib.showContext('save_change')
 end)
 
 RegisterNetEvent('ox_appearance:wardrobe', function()
@@ -98,14 +61,6 @@ RegisterNetEvent('ox_appearance:wardrobe', function()
 
     lib.showContext('wardrobe_menu')
 end)
-
-function getTableSize(t)
-    local count = 0
-    for _, __ in pairs(t) do
-        count = count + 1
-    end
-    return count
-end
 
 AddEventHandler('ox_appearance:setOutfit', function(data)
 	lib.registerContext({
@@ -189,3 +144,51 @@ RegisterNetEvent('ox_appearance:use', function(data)
 		end
     end
 end)
+
+if GetConvarInt("ox_appearance:disable_commands", 0) == 0 then
+	RegisterCommand('saveoutfit', function(source, args, raw)
+		local slot = tonumber(args[1])
+
+		if type(slot) == 'number' then
+			if not outfitNames then getOutfitNames() end
+
+			local appearance = exports['fivem-appearance']:getPedAppearance(cache.ped)
+			outfitNames[slot] = args[2]
+			outfits[slot] = appearance
+
+			TriggerServerEvent('ox_appearance:saveOutfit', appearance, slot, outfitNames)
+		end
+	end)
+
+	RegisterCommand('outfit', function(source, args, raw)
+		local slot = tonumber(args[1])
+
+		if type(slot) == 'number' then
+			local appearance = getOutfit(slot)
+
+			if not appearance.model then appearance.model = 'mp_m_freemode_01' end
+			exports['fivem-appearance']:setPlayerAppearance(appearance)
+		end
+	end)
+
+	RegisterCommand('outfits', function(source, args, raw)
+		lib.showContext('save_change')
+	end)
+end
+
+lib.registerContext({
+	id = 'save_change',
+	title = locale('outfits'),
+	options = {
+		{
+			title = locale('wardrobe'),
+			event = 'ox_appearance:wardrobe',
+		},
+		{
+			title = locale('save_outfit'),
+			arrow = true,
+			event = 'ox_appearance:saveOutfit',
+			args = {slot = 'new', name = ''}
+		},
+	}
+})
