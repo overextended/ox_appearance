@@ -1,3 +1,35 @@
+local config = {
+	clothing = {
+		ped = false,
+		headBlend = false,
+		faceFeatures = false,
+		headOverlays = false,
+		components = true,
+		props = true,
+		tattoos = false
+	},
+
+	barber = {
+		ped = false,
+		headBlend = false,
+		faceFeatures = false,
+		headOverlays = true,
+		components = false,
+		props = false,
+		tattoos = false
+	},
+
+	tattoos = {
+		ped = false,
+		headBlend = false,
+		faceFeatures = false,
+		headOverlays = false,
+		components = false,
+		props = false,
+		tattoos = true
+	}
+}
+
 local shops = {
 	clothing = {
 		vec(72.3, -1399.1, 28.4),
@@ -58,96 +90,81 @@ local function createBlip(name, sprite, colour, scale, location)
 	end
 end
 
-for i = 1, #shops.clothing do
-	createBlip('Clothing store', 73, 47, 0.7, shops.clothing[i])
+if GetConvarInt("ox_appearance:disable_blips", 0) == 0 then
+	for i = 1, #shops.clothing do
+		createBlip('Clothing store', 73, 47, 0.7, shops.clothing[i])
+	end
+
+	for i = 1, #shops.barber do
+		createBlip('Barber shop', 71, 47, 0.7, shops.barber[i])
+	end
+
+	for i = 1, #shops.tattoos do
+		createBlip('Tattoo studio', 75, 1, 0.7, shops.tattoos[i])
+	end
 end
 
-for i = 1, #shops.barber do
-	createBlip('Barber shop', 71, 47, 0.7, shops.barber[i])
+local function openShop(shopType)
+	exports['fivem-appearance']:startPlayerCustomization(function(appearance)
+		if (appearance) then
+			if ESX then
+				TriggerServerEvent('esx_skin:save', appearance)
+			else
+				TriggerServerEvent('ox_appearance:save', appearance)
+			end
+		end
+	end, config[shopType])
 end
+exports("OpenShop", openShop)
 
-for i = 1, #shops.tattoos do
-	createBlip('Tattoo studio', 75, 1, 0.7, shops.tattoos[i])
-end
+if GetConvarInt("ox_appearance:external_integration", 0) == 0 then
+	local shopType
+	local function getClosestShop(currentShop, coords)
+		local closestShop = #(currentShop.xyz - coords)
 
-local shopType
-local config = {
-	clothing = {
-		ped = false,
-		headBlend = false,
-		faceFeatures = false,
-		headOverlays = false,
-		components = true,
-		props = true,
-		tattoos = false
-	},
-
-	barber = {
-		ped = false,
-		headBlend = false,
-		faceFeatures = false,
-		headOverlays = true,
-		components = false,
-		props = false,
-		tattoos = false
-	},
-
-	tattoos = {
-		ped = false,
-		headBlend = false,
-		faceFeatures = false,
-		headOverlays = false,
-		components = false,
-		props = false,
-		tattoos = true
-	}
-}
-
-local function getClosestShop(currentShop, coords)
-	local closestShop = #(currentShop.xyz - coords)
-
-	if closestShop > 25 then
-		for name, data in pairs(shops) do
-			for i = 1, #data do
-				Wait(100)
-				local distance = #(data[i].xyz - coords)
-				if distance < closestShop then
-					closestShop = distance
-					currentShop = data[i]
-					shopType = name
+		if closestShop > 25 then
+			for name, data in pairs(shops) do
+				for i = 1, #data do
+					Wait(100)
+					local distance = #(data[i].xyz - coords)
+					if distance < closestShop then
+						closestShop = distance
+						currentShop = data[i]
+						shopType = name
+					end
 				end
 			end
 		end
-	end
 
-	if closestShop > 25 then
-		Wait(1000)
-	else
-		Wait(0)
-	if closestShop < 7 then
-			if IsControlJustReleased(0, 38) then
-				exports['fivem-appearance']:startPlayerCustomization(function(appearance)
-					if (appearance) then
-						if ESX then
-							TriggerServerEvent('esx_skin:save', appearance)
-						else
-							TriggerServerEvent('ox_appearance:save', appearance)
+		if closestShop > 25 then
+			Wait(1000)
+		else
+			Wait(0)
+		if closestShop < 7 then
+				if IsControlJustReleased(0, 38) then
+					exports['fivem-appearance']:startPlayerCustomization(function(appearance)
+						if (appearance) then
+							if ESX then
+								TriggerServerEvent('esx_skin:save', appearance)
+							else
+								TriggerServerEvent('ox_appearance:save', appearance)
+							end
 						end
-					end
-				end, config[shopType])
+					end, config[shopType])
+				end
 			end
 		end
+
+		return currentShop
 	end
 
-	return currentShop
+	CreateThread(function()
+		local currentShop = vec(0, 0, 0)
+
+		while true do
+			local playerPed = PlayerPedId()
+			local playerCoords = GetEntityCoords(playerPed)
+			currentShop = getClosestShop(currentShop, playerCoords)
+		end
+	end)
 end
-
-CreateThread(function()
-	local currentShop = vec(0, 0, 0)
-
-	while true do
-		local playerPed = PlayerPedId()
-		local playerCoords = GetEntityCoords(playerPed)
-		currentShop = getClosestShop(currentShop, playerCoords)
-	end
-end)
