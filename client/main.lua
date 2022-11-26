@@ -1,3 +1,5 @@
+lib.locale()
+
 local config = {
 	clothing = {
 		ped = false,
@@ -90,20 +92,6 @@ local function createBlip(name, sprite, colour, scale, location)
 	end
 end
 
-if GetConvarInt("ox_appearance:disable_blips", 0) == 0 then
-	for i = 1, #shops.clothing do
-		createBlip('Clothing store', 73, 47, 0.7, shops.clothing[i])
-	end
-
-	for i = 1, #shops.barber do
-		createBlip('Barber shop', 71, 47, 0.7, shops.barber[i])
-	end
-
-	for i = 1, #shops.tattoos do
-		createBlip('Tattoo studio', 75, 1, 0.7, shops.tattoos[i])
-	end
-end
-
 local function openShop(shopType)
 	exports['fivem-appearance']:startPlayerCustomization(function(appearance)
 		if (appearance) then
@@ -117,54 +105,67 @@ local function openShop(shopType)
 end
 exports("OpenShop", openShop)
 
-if GetConvarInt("ox_appearance:external_integration", 0) == 0 then
-	local shopType
-	local function getClosestShop(currentShop, coords)
-		local closestShop = #(currentShop.xyz - coords)
-
-		if closestShop > 25 then
-			for name, data in pairs(shops) do
-				for i = 1, #data do
-					Wait(100)
-					local distance = #(data[i].xyz - coords)
-					if distance < closestShop then
-						closestShop = distance
-						currentShop = data[i]
-						shopType = name
-					end
-				end
-			end
-		end
-
-		if closestShop > 25 then
-			Wait(1000)
-		else
-			Wait(0)
-		if closestShop < 7 then
-				if IsControlJustReleased(0, 38) then
-					exports['fivem-appearance']:startPlayerCustomization(function(appearance)
-						if (appearance) then
-							if ESX then
-								TriggerServerEvent('esx_skin:save', appearance)
-							else
-								TriggerServerEvent('ox_appearance:save', appearance)
-							end
-						end
-					end, config[shopType])
-				end
-			end
-		end
-
-		return currentShop
+-- Create Blips
+if GetConvarInt("ox_appearance:disable_blips", 0) == 0 then
+	for i = 1, #shops.clothing do
+		createBlip(locale('clothing_blip'), 73, 47, 0.7, shops.clothing[i])
 	end
 
-	CreateThread(function()
-		local currentShop = vec(0, 0, 0)
+	for i = 1, #shops.barber do
+		createBlip(locale('barber_blip'), 71, 47, 0.7, shops.barber[i])
+	end
 
-		while true do
-			local playerPed = PlayerPedId()
-			local playerCoords = GetEntityCoords(playerPed)
-			currentShop = getClosestShop(currentShop, playerCoords)
+	for i = 1, #shops.tattoos do
+		createBlip(locale('tattoo_blip'), 75, 1, 0.7, shops.tattoos[i])
+	end
+end
+
+-- Create Zones
+if GetConvarInt("ox_appearance:external_integration", 0) == 0 then
+	local Zones = {}
+	
+	local function inside(self)
+		if IsControlJustReleased(0, 38) then
+			lib.hideTextUI()
+			exports['fivem-appearance']:startPlayerCustomization(function(appearance)
+				if (appearance) then
+					if ESX then
+						TriggerServerEvent('esx_skin:save', appearance)
+					else
+						TriggerServerEvent('ox_appearance:save', appearance)
+					end
+				end
+			end, config[self.shopType])
+		end
+	end
+	
+	local function onEnter(self)
+		lib.showTextUI(locale('open_shop'))
+	end
+	
+	local function onExit(self)
+		lib.hideTextUI()
+	end
+
+	for name, data in pairs(shops) do
+		for i = 1, #data do
+			local coord = data[i].xyz + vec(0, 0, 1)
+			Zones[i] = lib.zones.sphere({
+				coords = coord,
+				radius = 1,
+				debug = false,
+				inside = inside,
+				onEnter = onEnter,
+				onExit = onExit,
+				shopType = name
+			})
+		end
+	end
+
+	AddEventHandler('onResourceStop', function(resource)
+		if GetCurrentResourceName() ~= resource then return end
+		for i = 1, #Zones do
+			Zones[i]:remove()
 		end
 	end)
 end

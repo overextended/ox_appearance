@@ -7,7 +7,7 @@ game         'gta5'
 --[[ Resource Information ]]--
 name         'ox_appearance'
 author       'Linden'
-version      '1.0.0'
+version      '1.0.1'
 repository   'https://github.com/overextended/ox_appearance'
 description  'Persistent appearance data and outfits for ox_appearance.'
 
