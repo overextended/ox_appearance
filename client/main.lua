@@ -103,6 +103,7 @@ local function openShop(shopType)
 		end
 	end, config[shopType])
 end
+
 exports("OpenShop", openShop)
 
 -- Create Blips
@@ -123,7 +124,7 @@ end
 -- Create Zones
 if GetConvarInt("ox_appearance:external_integration", 0) == 0 then
 	local Zones = {}
-	
+
 	local function inside(self)
 		if IsControlJustReleased(0, 38) then
 			lib.hideTextUI()
@@ -138,34 +139,30 @@ if GetConvarInt("ox_appearance:external_integration", 0) == 0 then
 			end, config[self.shopType])
 		end
 	end
-	
-	local function onEnter(self)
+
+	local hasTextUi = false
+
+	local function onEnter()
+		hasTextUi = true
 		lib.showTextUI(locale('open_shop'))
 	end
-	
-	local function onExit(self)
-		lib.hideTextUI()
+
+	local function onExit()
+		if hasTextUi then
+			lib.hideTextUI()
+		end
 	end
 
 	for name, data in pairs(shops) do
 		for i = 1, #data do
-			local coord = data[i].xyz + vec(0, 0, 1)
-			Zones[i] = lib.zones.sphere({
-				coords = coord,
-				radius = 1,
-				debug = false,
-				inside = inside,
+			lib.points.new({
+				coords = data[i].xyz + vec(0, 0, 1),
+				distance = 10,
+				nearby = inside,
 				onEnter = onEnter,
 				onExit = onExit,
 				shopType = name
 			})
 		end
 	end
-
-	AddEventHandler('onResourceStop', function(resource)
-		if GetCurrentResourceName() ~= resource then return end
-		for i = 1, #Zones do
-			Zones[i]:remove()
-		end
-	end)
 end
