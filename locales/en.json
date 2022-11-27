@@ -8,5 +8,9 @@
     "outfit_name": "Outfit Name",
     "new_outfit": "New Outfit",
     "rename_outfit": "Rename Outfit",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "open_shop": "[E] Open Shop",
+    "clothing_blip": "Clothing store",
+    "barber_blip": "Barber shop",
+    "tattoo_blip": "Tattoo studio"
 }

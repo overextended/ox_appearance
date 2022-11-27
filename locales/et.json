@@ -8,5 +8,9 @@
     "outfit_name": "Riietuskomplekti nimi",
     "new_outfit": "Uus komplekt",
     "rename_outfit": "Nimeta komplekt ümber",
-    "confirm": "Kinnita"
+    "confirm": "Kinnita",
+    "open_shop": "[E] Open Shop",
+    "clothing_blip": "Clothing store",
+    "barber_blip": "Barber shop",
+    "tattoo_blip": "Tattoo studio"
 }

@@ -8,5 +8,9 @@
     "outfit_name": "Nombre del Conjunto",
     "new_outfit": "Nuevo Conjunto",
     "rename_outfit": "Renombrar Conjunto",
-    "confirm": "Confirmar"
+    "confirm": "Confirmar",
+    "open_shop": "[E] Open Shop",
+    "clothing_blip": "Clothing store",
+    "barber_blip": "Barber shop",
+    "tattoo_blip": "Tattoo studio"
 }

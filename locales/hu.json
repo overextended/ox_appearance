@@ -2,11 +2,15 @@
     "wardrobe": "Ruhásszekrény",
     "outfits": "Öltözetek",
     "save": "Mentés",
-      "save_outfit": "Új ruha elmentése",
+    "save_outfit": "Új ruha elmentése",
     "wear": "Felvéve %s",
     "update": "Frissítve %s",
     "outfit_name": "Öltözet neve",
     "new_outfit": "Új öltözet",
     "rename_outfit": "Öltözet átnevezése",
-    "confirm": "Megerősítés"
+    "confirm": "Megerősítés",
+    "open_shop": "[E] - Bolt megnyitása",
+    "clothing_blip": "Ruha bolt",
+    "barber_blip": "Fodrász",
+    "tattoo_blip": "Tetováló szalon"
 }

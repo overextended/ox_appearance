@@ -8,5 +8,9 @@
     "outfit_name": "Název outfitu",
     "new_outfit": "Nový outfit",
     "rename_outfit": "Přejmenovat outfit",
-    "confirm": "Potvrdit"
+    "confirm": "Potvrdit",
+    "open_shop": "[E] Open Shop",
+    "clothing_blip": "Clothing store",
+    "barber_blip": "Barber shop",
+    "tattoo_blip": "Tattoo studio"
 }
