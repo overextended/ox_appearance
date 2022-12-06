@@ -9,8 +9,8 @@
     "new_outfit": "Nowy strój",
     "rename_outfit": "Zmień nazwę stroju",
     "confirm": "Akceptuj",
-    "open_shop": "[E] Open Shop",
-    "clothing_blip": "Clothing store",
-    "barber_blip": "Barber shop",
-    "tattoo_blip": "Tattoo studio"
+    "open_shop": "[E] Otwórz sklep",
+    "clothing_blip": "Sklep z ubraniami",
+    "barber_blip": "Salon fryzjerski",
+    "tattoo_blip": "Salon tatuażu"
 }
