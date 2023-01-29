@@ -2,11 +2,15 @@
     "wardrobe": "Garde-robe",
     "outfits": "Tenues",
     "save": "Sauvegarder",
-    "save_outfit": "Sauvegarder tenue",
+    "save_outfit": "Sauvegarder la tenue",
     "wear": "Porter %s",
     "update": "Modifier %s",
-    "outfit_name": "Nom tenue",
+    "outfit_name": "Nom de la tenue",
     "new_outfit": "Nouvelle tenue",
-    "rename_outfit": "Renommer tenue",
-    "confirm": "Confirmer"
+    "rename_outfit": "Renommer la tenue",
+    "confirm": "Confirmer",
+    "open_shop": "[E] Accéder au magasin",
+    "clothing_blip": "Magasin de vêtement",
+    "barber_blip": "Coiffeur",
+    "tattoo_blip": "Salon de tatouage"
 }
