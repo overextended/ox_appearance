@@ -1,0 +1,16 @@
+{
+    "wardrobe": "Garderoba",
+    "outfits": "Zapisane stroje",
+    "save": "Zapisz",
+    "save_outfit": "Zapisz nowy strój",
+    "wear": "Ubierz %s",
+    "update": "Aktualizacja %s",
+    "outfit_name": "Nazwa stroju",
+    "new_outfit": "Nowy strój",
+    "rename_outfit": "Zmień nazwę stroju",
+    "confirm": "Akceptuj",
+    "open_shop": "[E] Otwórz sklep",
+    "clothing_blip": "Sklep z ubraniami",
+    "barber_blip": "Salon fryzjerski",
+    "tattoo_blip": "Salon tatuażu"
+}
