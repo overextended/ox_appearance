@@ -192,3 +192,26 @@ lib.registerContext({
 		},
 	}
 })
+
+RegisterNetEvent('ox_appearance:triggeredCommand', function()
+	local config = {
+		ped = true,
+		headBlend = true,
+		faceFeatures = true,
+		headOverlays = true,
+		components = true,
+		props = true,
+		allowExit = true,
+		tattoos = true
+	  }
+	
+	  exports['fivem-appearance']:startPlayerCustomization(function (appearance)
+		if (appearance) then
+			if ESX then
+				TriggerServerEvent('esx_skin:save', appearance)
+			else
+				TriggerServerEvent('ox_appearance:save', appearance)
+			end
+		end
+	  end, config)
+end)
