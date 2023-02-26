@@ -1,4 +1,5 @@
 Players = {}
+lib.locale()
 
 function SaveAppearance(identifier, appearance)
 	SetResourceKvp(('%s:appearance'):format(identifier), json.encode(appearance))
@@ -63,4 +64,23 @@ end)
 
 AddEventHandler('playerDropped', function()
 	Players[source] = nil
+end)
+
+lib.addCommand('skin', {
+    help = locale('command_help'),
+    params = {
+        {
+            name = 'target',
+            type = 'playerId',
+            help = locale('command_help_target'),
+	    optional = true
+	}
+    },
+    restricted = 'group.admin'
+}, function(source, args, raw)
+	if args.target then
+		TriggerClientEvent('ox_appearance:triggeredCommand', args.target)
+	else
+		TriggerClientEvent('ox_appearance:triggeredCommand', source)
+	end
 end)
