@@ -13,5 +13,7 @@
     "open_shop": "[E] Open Shop",
     "clothing_blip": "Clothing store",
     "barber_blip": "Barber shop",
-    "tattoo_blip": "Tattoo studio"
+    "tattoo_blip": "Tattoo studio",
+     "command_help": "Open skin menu for the player",
+    "command_help_target": "Target player's server id"
 }
