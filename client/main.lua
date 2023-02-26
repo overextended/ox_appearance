@@ -8,7 +8,8 @@ local config = {
 		headOverlays = false,
 		components = true,
 		props = true,
-		tattoos = false
+		tattoos = false,
+		allowExit = true
 	},
 
 	barber = {
@@ -18,7 +19,8 @@ local config = {
 		headOverlays = true,
 		components = false,
 		props = false,
-		tattoos = false
+		tattoos = false,
+		allowExit = true
 	},
 
 	tattoos = {
@@ -28,7 +30,8 @@ local config = {
 		headOverlays = false,
 		components = false,
 		props = false,
-		tattoos = true
+		tattoos = true,
+		allowExit = true
 	}
 }
 
