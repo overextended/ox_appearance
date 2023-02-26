@@ -6,6 +6,7 @@
     "wear": "Wear %s",
     "update": "Update %s",
     "outfit_name": "Outfit Name",
+    "invalid_name": "Name is not valid",
     "new_outfit": "New Outfit",
     "rename_outfit": "Rename Outfit",
     "confirm": "Confirm",
