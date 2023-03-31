@@ -2,7 +2,13 @@ Players = {}
 lib.locale()
 
 function SaveAppearance(identifier, appearance)
-	SetResourceKvp(('%s:appearance'):format(identifier), json.encode(appearance))
+	local outfitKey = ('%s:appearance'):format(identifier)
+
+	if appearance then
+		SetResourceKvp(outfitKey, json.encode(appearance))
+	else
+		DeleteResourceKvp(outfitKey)
+	end
 end
 
 exports('save', SaveAppearance)
@@ -16,7 +22,14 @@ end
 exports('load', LoadAppearance)
 
 function SaveOutfit(identifier, appearance, slot, outfitNames)
-	SetResourceKvp(('%s:outfit_%s'):format(identifier, slot), json.encode(appearance))
+	local outfitKey = ('%s:outfit_%s'):format(identifier, slot)
+
+	if appearance then
+		SetResourceKvp(outfitKey, json.encode(appearance))
+	else
+		DeleteResourceKvp(outfitKey)
+	end
+
 	SetResourceKvp(('%s:outfits'):format(identifier), json.encode(outfitNames))
 end
 
