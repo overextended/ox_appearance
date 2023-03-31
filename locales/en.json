@@ -5,6 +5,7 @@
     "save_outfit": "Save new outfit",
     "wear": "Wear %s",
     "update": "Update %s",
+    "delete": "Delete %s",
     "outfit_name": "Outfit Name",
     "invalid_name": "Name is not valid",
     "new_outfit": "New Outfit",

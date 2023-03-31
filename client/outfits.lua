@@ -79,6 +79,11 @@ AddEventHandler('ox_appearance:setOutfit', function(data)
 				event = 'ox_appearance:saveOutfit',
 				args = data
 
+			},
+			{
+				title = locale('delete', data.name),
+				event = 'ox_appearance:deleteOutfit',
+				args = data
 			}
 		}
 	})
@@ -117,6 +122,25 @@ AddEventHandler('ox_appearance:saveOutfit', function(data)
 
 			TriggerServerEvent('ox_appearance:saveOutfit', appearance, data.slot, outfitNames)
 		end
+	end
+
+	lib.showContext('save_change')
+end)
+
+AddEventHandler('ox_appearance:deleteOutfit', function(data)
+	if not outfitNames then getOutfitNames() end
+
+	local alert = lib.alertDialog({
+		header = locale('delete', data.name),
+		centered = true,
+		cancel = true
+	})
+
+	if alert == 'confirm' then
+		outfitNames[data.slot] = nil
+		outfits[data.slot] = nil
+
+		TriggerServerEvent('ox_appearance:saveOutfit', nil, data.slot, outfitNames)
 	end
 
 	lib.showContext('save_change')
