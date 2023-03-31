@@ -101,6 +101,7 @@ AddEventHandler('ox_appearance:saveOutfit', function(data)
 			TriggerServerEvent('ox_appearance:saveOutfit', appearance, data.slot, outfitNames)
 		end
 	else
+		---@type string[]?
 		local input = lib.inputDialog(locale('update', data.name), {
 			{ type = 'input', label = locale('outfit_name') }
 		})
@@ -109,6 +110,7 @@ AddEventHandler('ox_appearance:saveOutfit', function(data)
 			if input[1]:len() < 1 then
 				return lib.notify({ type = 'error', description = locale('invalid_name') })
 			end
+
 			local appearance = exports['fivem-appearance']:getPedAppearance(cache.ped)
 			outfitNames[data.slot] = input[1] or data.name
 			outfits[data.slot] = appearance
@@ -116,6 +118,8 @@ AddEventHandler('ox_appearance:saveOutfit', function(data)
 			TriggerServerEvent('ox_appearance:saveOutfit', appearance, data.slot, outfitNames)
 		end
 	end
+
+	lib.showContext('save_change')
 end)
 
 RegisterNetEvent('ox_appearance:use', function(data)
