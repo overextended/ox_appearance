@@ -1,0 +1,20 @@
+{
+    "wardrobe": "Kıyafet Dolabı",
+    "outfits": "Kombinler",
+    "save": "Kaydet",
+    "save_outfit": "Yeni kombin kaydet",
+    "wear": "%s Giy",
+    "update": "%s Güncelle",
+    "delete": "%s Sil",
+    "outfit_name": "Kombin Adı",
+    "invalid_name": "Geçersiz ad",
+    "new_outfit": "Yeni Kombin",
+    "rename_outfit": "Kombini yeniden adlandır",
+    "confirm": "Onayla",
+    "open_shop": "[E] Mağazayı aç",
+    "clothing_blip": "Kıyafet Mağazası",
+    "barber_blip": "Berber Dükkanı",
+    "tattoo_blip": "Dövme Stüdyosu",
+    "command_help": "Oyuncu için kıyafet menüsünü aç",
+    "command_help_target": "Hedef oyuncunun sunucu kimliği"
+}
