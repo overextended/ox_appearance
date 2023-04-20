@@ -1,16 +1,20 @@
 {
     "wardrobe": "Garderoba",
-    "outfits": "Zapisane stroje",
+    "outfits": "Stroje",
     "save": "Zapisz",
     "save_outfit": "Zapisz nowy strój",
     "wear": "Ubierz %s",
-    "update": "Aktualizacja %s",
+    "update": "Aktualizuj %s",
+    "delete": "Usuń %s",
     "outfit_name": "Nazwa stroju",
+    "invalid_name": "Nazwa nie jest poprawna",
     "new_outfit": "Nowy strój",
     "rename_outfit": "Zmień nazwę stroju",
-    "confirm": "Akceptuj",
+    "confirm": "Potwierdź",
     "open_shop": "[E] Otwórz sklep",
     "clothing_blip": "Sklep z ubraniami",
     "barber_blip": "Salon fryzjerski",
-    "tattoo_blip": "Salon tatuażu"
+    "tattoo_blip": "Salon tatuażu",
+    "command_help": "Otwórz menu wyglądu dla gracza",
+    "command_help_target": "Id gracza"
 }
