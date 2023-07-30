@@ -5,12 +5,16 @@
     "save_outfit": "Új ruha elmentése",
     "wear": "Felvéve %s",
     "update": "Frissítve %s",
+    "delete": "Törölve %s",
     "outfit_name": "Öltözet neve",
+    "invalid_name": "A név nem érvényes",
     "new_outfit": "Új öltözet",
     "rename_outfit": "Öltözet átnevezése",
     "confirm": "Megerősítés",
     "open_shop": "[E] - Bolt megnyitása",
     "clothing_blip": "Ruha bolt",
     "barber_blip": "Fodrász",
-    "tattoo_blip": "Tetováló szalon"
+    "tattoo_blip": "Tetováló szalon",
+    "command_help": "Skin menü megnyitása egy játékosnak",
+    "command_help_target": "A céljátékis id-je"
 }
