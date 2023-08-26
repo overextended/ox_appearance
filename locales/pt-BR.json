@@ -1,0 +1,20 @@
+{
+  "wardrobe": "Guarda-roupa",
+  "outfits": "Trajes",
+  "save": "Salvar",
+  "save_outfit": "Salvar novo traje",
+  "wear": "Vestir %s",
+  "update": "Atualizar %s",
+  "delete": "Excluir %s",
+  "outfit_name": "Nome do traje",
+  "invalid_name": "O nome não é válido",
+  "new_outfit": "Novo traje",
+  "rename_outfit": "Renomear traje",
+  "confirm": "Confirmar",
+  "open_shop": "[E] Abrir loja",
+  "clothing_blip": "Loja de roupas",
+  "barber_blip": "Barbearia",
+  "tattoo_blip": "Estúdio de tatuagem",
+  "command_help": "Abrir menu de personalização de aparência para o jogador",
+  "command_help_target": "Id do jogador alvo"
+}
