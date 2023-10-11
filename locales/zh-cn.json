@@ -1,0 +1,20 @@
+{
+    "wardrobe": "衣柜",
+    "outfits": "服装",
+    "save": "保存",
+    "save_outfit": "保存新服装",
+    "wear": "穿上 %s",
+    "update": "更新 %s",
+    "delete": "删除 %s",
+    "outfit_name": "服装名称",
+    "invalid_name": "名称不可用",
+    "new_outfit": "新服装",
+    "rename_outfit": "重命名服装",
+    "confirm": "确认",
+    "open_shop": "[E] 打开商店",
+    "clothing_blip": "服装店",
+    "barber_blip": "理发店",
+    "tattoo_blip": "纹身店",
+     "command_help": "打开玩家外观界面",
+    "command_help_target": "目标玩家服务器ID"
+}
